@@ -4,7 +4,7 @@ import glob from "fast-glob";
 import { formatBytes } from "../src/util/helpers";
 
 async function run() {
-	const start = performance.now();
+			const start = performance.now();
 	const globs = ["src/**/*.svg"];
 
 	const files = await glob(globs);
