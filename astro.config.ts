@@ -39,10 +39,14 @@ async function autogenSections() {
 	return sections.map((x) => {
 		return {
 			label: x,
-			autogenerate: {
-				directory: x,
-				collapsed: true,
-			},
+			items: [
+				{
+					autogenerate: {
+						directory: x,
+						collapsed: true,
+					},
+				},
+			],
 		};
 	});
 }
@@ -56,6 +60,7 @@ async function autogenStyles() {
 	)
 		.filter((x) => x.isFile())
 		.map((x) => x.parentPath + x.name)
+		.filter((x) => x !== "./src/styles/landing.css")
 		.sort((a) => (a === "./src/styles/tailwind.css" ? -1 : 1));
 
 	return styles;
@@ -188,14 +193,12 @@ export default defineConfig({
 									"/rules/transform/examples/?operation=*",
 									"/ruleset-engine/rules-language/fields/reference/**",
 									"/workers/examples/?languages=*",
-									"/workers/examples/?tags=*",
 									"/workers/llms-full.txt",
 									"/workers-ai/models/**",
 									"/markdown.zip",
 									"/style-guide/index.md",
-									"/videos/**",
-									"/search/**",
 									"/agent-setup/",
+									"/videos/**",
 								],
 							}),
 						]
@@ -218,7 +221,6 @@ export default defineConfig({
 				headingLinks: false,
 				processedDirs: ["./src/content/partials/", "./src/content/changelog/"],
 			},
-			routeMiddleware: "./src/plugins/starlight/route-data.ts",
 			disable404Route: true,
 		}),
 		liveCode({}),
